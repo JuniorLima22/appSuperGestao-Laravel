@@ -29,24 +29,25 @@
         <div class="contato">
             <h1>Contato</h1>
             <p>Caso tenha qualquer dúvida por favor entre em contato com nossa equipe pelo formulário abaixo.<p>
-            <form>
-                <input type="text" placeholder="Nome" class="borda-branca">
-                <br>
-                <input type="text" placeholder="Telefone" class="borda-branca">
-                <br>
-                <input type="text" placeholder="E-mail" class="borda-branca">
-                <br>
-                <select class="borda-branca">
-                    <option value="">Qual o motivo do contato?</option>
-                    <option value="">Dúvida</option>
-                    <option value="">Elogio</option>
-                    <option value="">Reclamação</option>
-                </select>
-                <br>
-                <textarea class="borda-branca">Preencha aqui a sua mensagem</textarea>
-                <br>
-                <button type="submit" class="borda-branca">ENVIAR</button>
-            </form>
+                <form action="{{ route('site.contato') }}" method="POST">
+                    @csrf
+                    <input type="text" name="nome" placeholder="Nome" class="borda-preta">
+                    <br>
+                    <input type="text" name="telefone" placeholder="Telefone" class="borda-preta">
+                    <br>
+                    <input type="text" name="email" placeholder="E-mail" class="borda-preta">
+                    <br>
+                    <select name="motivo_contato" class="borda-preta">
+                        <option value="">Qual o motivo do contato?</option>
+                        <option value="Dúvida">Dúvida</option>
+                        <option value="Elogio">Elogio</option>
+                        <option value="Reclamação">Reclamação</option>
+                    </select>
+                    <br>
+                    <textarea name="mensagem" class="borda-preta" placeholder="Preencha aqui a sua mensagem"></textarea>
+                    <br>
+                    <button type="submit" class="borda-preta">ENVIAR</button>
+                </form>
         </div>
     </div>
 </div>
