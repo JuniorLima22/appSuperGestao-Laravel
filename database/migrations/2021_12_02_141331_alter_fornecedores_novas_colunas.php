@@ -14,8 +14,9 @@ class AlterFornecedoresNovasColunas extends Migration
     public function up()
     {
         Schema::table('fornecedores', function (Blueprint $table) {
-            $table->string('uf', 2);
-            $table->string('email', 150);
+            $table->string('site', 150)->after('nome');
+            $table->string('uf', 2)->after('site');
+            $table->string('email', 150)->after('uf');
         });
     }
 
