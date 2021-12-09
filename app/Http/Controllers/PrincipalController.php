@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\MotivoContato;
 use Illuminate\Http\Request;
 
-class TesteController extends Controller
+class PrincipalController extends Controller
 {
     public function index()
     {
-        return view('site.principal');
+        $motivo_contatos = MotivoContato::all();
+        return view('site.principal', compact('motivo_contatos'));
     }
 
     public function sobreNos()
     {
         return view('site.sobre-nos');
-    }
-
-    public function contato()
-    {
-        return view('site.contato');
     }
 }
