@@ -20,7 +20,7 @@ class ContatoController extends Controller
             'nome' => 'required|min:3|max:40',
             'telefone' => 'required',
             'email' => 'required|email',
-            'motivo_contato' => 'required',
+            'motivo_contatos_id' => 'required',
             'mensagem' => 'required|max:200',
         ]);
         
@@ -28,6 +28,6 @@ class ContatoController extends Controller
         $contato->fill($request->all());
         $contato->save();
 
-        return view('site.contato');
+        return redirect()->route('site.principal');
     }
 }
