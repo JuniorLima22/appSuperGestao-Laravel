@@ -19,7 +19,7 @@ class LogAcessoMiddleware
         $ip = $request->server->get('REMOTE_ADDR');
         $rota = $request->getRequestUri();
         LogAcesso::create(['log' => "IP {$ip} requisitou a rota {$rota}"]);
-        // return $next($request);
-        return Response('Response do Middleware');
+        return $next($request);
+        // return Response('Response do Middleware');
     }
 }
