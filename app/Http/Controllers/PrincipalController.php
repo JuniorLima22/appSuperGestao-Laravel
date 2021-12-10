@@ -12,9 +12,4 @@ class PrincipalController extends Controller
         $motivo_contatos = MotivoContato::all();
         return view('site.principal', compact('motivo_contatos'));
     }
-
-    public function sobreNos()
-    {
-        return view('site.sobre-nos');
-    }
 }

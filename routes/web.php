@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'PrincipalController@index')->name('site.principal')->middleware(LogAcessoMiddleware::class);
-Route::get('/sobre-nos', 'PrincipalController@sobreNos')->name('site.sobre-nos');
+Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobre-nos');
 Route::get('/contato', 'ContatoController@index')->name('site.contato')->middleware(LogAcessoMiddleware::class);
 Route::post('/contato', 'ContatoController@store')->name('site.contato');
