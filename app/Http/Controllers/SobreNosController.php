@@ -9,7 +9,7 @@ class SobreNosController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(LogAcessoMiddleware::class);
+        $this->middleware('log.acesso');
     }
     
     public function sobreNos()
