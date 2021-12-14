@@ -19,6 +19,9 @@ Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobre-nos');
 Route::get('/contato', 'ContatoController@index')->name('site.contato')->middleware('log.acesso');
 Route::post('/contato', 'ContatoController@store')->name('site.contato');
 
+Route::get('/login', 'LoginController@index')->name('site.login');
+Route::post('/login', 'LoginController@autenticar')->name('site.login');
+
 Route::middleware('log.acesso', 'autenticacao:ldap, visitante')->prefix('/app')->group(function(){
     Route::get('/clientes', function(){ return 'Clientes'; })->name('app.clientes');
     Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
