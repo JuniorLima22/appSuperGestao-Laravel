@@ -33,13 +33,10 @@ class LoginController extends Controller
         $usuario = $user->where('email', $email)->where('password', $password)->first();
 
         if (isset($usuario->name)) {
-            // dump($usuario->name);
-            session(['key' => 'value', 'name'=> 'Junior Lima']);
-            // $value = session(['key' => 'value']);
-            dump(session::all());
+            Session(['nome' => $usuario->name, 'email'=> $usuario->email]);
+            return redirect()->route('app.clientes');
         }else{
             Session::flash('mensagem', 'Usuário e ou senha não existe.');
-            Session::flash('tipo');
             return back();
         }
     }
