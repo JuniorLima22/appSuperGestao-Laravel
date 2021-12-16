@@ -10,7 +10,6 @@ class FornecedorController extends Controller
     public function index()
     {
         $fornecedores = Fornecedor::get()->toArray();
-        dump($fornecedores);
-        return 'Route Fornecedores';
+        return view('app.fornecedor');
     }
 }

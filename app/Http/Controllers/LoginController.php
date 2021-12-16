@@ -34,10 +34,15 @@ class LoginController extends Controller
 
         if (isset($usuario->name)) {
             Session(['nome' => $usuario->name, 'email'=> $usuario->email]);
-            return redirect()->route('app.clientes');
+            return redirect()->route('app.home');
         }else{
             Session::flash('mensagem', 'Usuário e ou senha não existe.');
             return back();
         }
+    }
+
+    public function sair()
+    {
+        return 'sair';
     }
 }
