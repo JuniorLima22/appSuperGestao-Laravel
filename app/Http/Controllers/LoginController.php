@@ -40,9 +40,12 @@ class LoginController extends Controller
             return back();
         }
     }
-
+    
     public function sair()
     {
-        return 'sair';
+        Session::flush();
+        Session::flash('mensagem', 'Usuário saiu com sucesso.');
+        Session::flash('tipo', 'success');
+        return redirect()->route('site.login');
     }
 }
