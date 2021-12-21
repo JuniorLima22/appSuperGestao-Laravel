@@ -26,8 +26,7 @@ Route::middleware('log.acesso', 'autenticacao:ldap, visitante')->prefix('/app')-
     Route::get('/home', 'HomeController@index')->name('app.home');
     Route::get('/sair', 'LoginController@sair')->name('app.sair');
     Route::get('/cliente', 'ClienteController@index')->name('app.cliente');
-    Route::get('/produto', 'ProdutoController@index')->name('app.produto');
-
+    
     Route::get('/fornecedor', 'FornecedorController@index')->name('app.fornecedor');
     Route::match(['get', 'post'], '/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar');
     Route::get('/fornecedor/adicionar', 'FornecedorController@adicionar')->name('app.fornecedor.adicionar');
@@ -35,4 +34,6 @@ Route::middleware('log.acesso', 'autenticacao:ldap, visitante')->prefix('/app')-
     Route::get('/fornecedor/editar/{id}', 'FornecedorController@editar')->name('app.fornecedor.editar');
     Route::put('/fornecedor/atualizar/{id}', 'FornecedorController@atualizar')->name('app.fornecedor.atualizar');
     Route::delete('/fornecedor/deletar/{id}', 'FornecedorController@deletar')->name('app.fornecedor.deletar');
+
+    Route::resource('produto', 'ProdutoController');
 });
