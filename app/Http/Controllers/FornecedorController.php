@@ -22,12 +22,15 @@ class FornecedorController extends Controller
 
     public function listar(Request $request)
     {
+        $dataForm = $request->except('_token');
+
         $fornecedores = $this->fornecedor::where('nome', 'like', "%{$request->nome}%")
         ->where('site', 'like', "%{$request->site}%")
         ->where('uf', 'like', "%{$request->uf}%")
         ->where('email', 'like', "%{$request->email}%")
-        ->get();
-        return view('app.fornecedor.listar', compact('fornecedores'));
+        ->paginate(5);
+
+        return view('app.fornecedor.listar', compact('fornecedores', 'dataForm'));
     }
 
     public function adicionar()

@@ -40,12 +40,12 @@
                             <td>{{ $fornecedor->site }}</td>
                             <td>{{ $fornecedor->uf }}</td>
                             <td>{{ $fornecedor->email }}</td>
-                            <td><button onclick="location.href='{{ route('app.fornecedor.editar', $fornecedor->id) }}'">Editar</a></td>
+                            <td><button onclick="location.href='{{ route('app.fornecedor.editar', $fornecedor->id) }}'" class="borda-branca">Editar</a></td>
                             <td>
                                 <form action="{{ route('app.fornecedor.deletar', $fornecedor->id) }}" method="POST" onsubmit="return confirm('Tem certeza de que deseja excluir este fornecedor?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="texto-branco danger">Excluir</button>
+                                    <button class="texto-branco danger borda-branca">Excluir</button>
                                 </form>
                             </td>
                         </tr>
@@ -56,6 +56,12 @@
                     @endforelse
                 </tbody>
             </table>
+
+            <div>
+                {{ $fornecedores->appends($dataForm)->links() }} <br>
+                Exibindo {{ $fornecedores->count() }} fornecedores de {{ $fornecedores->total() }} (de {{ $fornecedores->firstItem() }} a {{ $fornecedores->lastItem() }})
+            </div>
+            
         </div>
     </div>
 </div>
