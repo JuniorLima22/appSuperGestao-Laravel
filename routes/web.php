@@ -34,4 +34,5 @@ Route::middleware('log.acesso', 'autenticacao:ldap, visitante')->prefix('/app')-
     Route::post('/fornecedor/adicionar', 'FornecedorController@gravar')->name('app.fornecedor.adicionar');
     Route::get('/fornecedor/editar/{id}', 'FornecedorController@editar')->name('app.fornecedor.editar');
     Route::put('/fornecedor/atualizar/{id}', 'FornecedorController@atualizar')->name('app.fornecedor.atualizar');
+    Route::delete('/fornecedor/deletar/{id}', 'FornecedorController@deletar')->name('app.fornecedor.deletar');
 });

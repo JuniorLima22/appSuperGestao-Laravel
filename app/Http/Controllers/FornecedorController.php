@@ -67,6 +67,23 @@ class FornecedorController extends Controller
         return redirect()->back();
     }
 
+
+
+    public function deletar($id)
+    {
+        // $fornecedor = $this->fornecedor::findOrFail($id)->forceDelete();
+        $fornecedor = $this->fornecedor::findOrFail($id)->delete();
+
+        if ($fornecedor) {
+            Session::flash('mensagem', 'Fornecedor excluido com sucesso.');
+            Session::flash('tipo', 'success');
+            return redirect()->back();
+        }
+
+        Session::flash('mensagem', 'Erro ao excluir fornecedor.');
+        return redirect()->back();
+    }
+
     private function validarFormulario($request)
     {
         $id = $request->id;

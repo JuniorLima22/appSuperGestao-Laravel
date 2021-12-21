@@ -50,6 +50,16 @@ button:hover {
     background-color: #6ea22c;
 }
 
+.danger {
+    background-color: #f44336;
+    cursor: pointer;
+    color: #fff;
+}
+
+.danger:hover {
+    background-color: #fa877f;
+}
+
 ::placeholder {
     color: #333333;
     opacity: 1;
