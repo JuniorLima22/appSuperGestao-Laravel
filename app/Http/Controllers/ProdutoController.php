@@ -12,9 +12,13 @@ class ProdutoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $dataForm = $request->except('_token');
+        
+        $produtos = Produto::paginate(10);
+
+        return view('app.produto.index', compact('produtos', 'dataForm'));
     }
 
     /**
