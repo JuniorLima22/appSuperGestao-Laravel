@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Produto;
+use App\Unidade;
+use Session;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
@@ -16,7 +18,7 @@ class ProdutoController extends Controller
     {
         $dataForm = $request->except('_token');
         
-        $produtos = Produto::paginate(10);
+        $produtos = Produto::paginate(5);
 
         return view('app.produto.index', compact('produtos', 'dataForm'));
     }
@@ -28,7 +30,8 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        $unidades = Unidade::all();
+        return view('app.produto.create', compact('unidades'));
     }
 
     /**
@@ -39,7 +42,18 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validarFormulario($request);
+
+        $produto = Produto::create($request->all());
+
+        if ($produto) {
+            Session::flash('mensagem', 'Produto cadastrado com sucesso.');
+            Session::flash('tipo', 'success');
+            return redirect()->back();
+        }
+
+        Session::flash('mensagem', 'Erro ao cadastrar produto.');
+        return redirect()->back();
     }
 
     /**
@@ -85,5 +99,27 @@ class ProdutoController extends Controller
     public function destroy(Produto $produto)
     {
         //
+    }
+
+    private function validarFormulario($request)
+    {
+        return $request->validate(
+            [
+                'nome' => "required|min:3|max:40",
+                'descricao' => 'required|min:3|max:200',
+                'peso' => 'required|integer',
+                'unidade_id' => 'required|exists:unidades,id',
+            ],
+            [
+                'required' => 'Campo :attribute deve ser preenchido',
+                'nome.min' => 'O nome deve ter pelo menos 3 caracteres.',
+                'nome.max' => 'O nome não pode ter mais de 40 caracteres.',
+                'descricao.min' => 'A descrição deve ter pelo menos 3 caracteres.',
+                'descricao.max' => 'A descrição não pode ter mais de 200 caracteres.',
+                'peso.integer' => 'O campo peso deve ser um número inteiro.',
+                'unidade_id.required' => 'Campo unidade deve ser selecionado',
+                'unidade_id.exists' => 'A unidade de medida informada não existe.',
+            ]
+        );
     }
 }
