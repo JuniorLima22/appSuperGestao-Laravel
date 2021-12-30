@@ -29,7 +29,7 @@
                         <td>Descrição</td>
                         <td>Peso</td>
                         <td>Unidade ID</td>
-                        <td colspan="2">Ações</td>
+                        <td colspan="3">Ações</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,7 +40,8 @@
                             <td>{{ $produto->descricao }}</td>
                             <td>{{ $produto->peso }}</td>
                             <td>{{ $produto->unidade_id }}</td>
-                            <td><button onclick="location.href='{{ route('produto.edit', $produto->id) }}'" class="borda-branca">Editar</a></td>
+                            <td><button onclick="location.href='{{ route('produto.show', $produto->id) }}'" class="info  borda-branca">Visualizar</button></td>
+                            <td><button onclick="location.href='{{ route('produto.edit', $produto->id) }}'" class="borda-branca">Editar</button></td>
                             <td>
                                 <form action="{{ route('produto.destroy', $produto->id) }}" method="POST" onsubmit="return confirm('Tem certeza de que deseja excluir este produto?')">
                                     @csrf

@@ -60,6 +60,16 @@ button:hover {
     background-color: #fa877f;
 }
 
+.info {
+    background-color: #2196F3;
+    cursor: pointer;
+    color: #fff;
+}
+
+.info:hover {
+    background-color: #50a6ec;
+}
+
 ::placeholder {
     color: #333333;
     opacity: 1;
