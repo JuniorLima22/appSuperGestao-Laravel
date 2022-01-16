@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Produto;
 use App\Unidade;
-use Session;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
@@ -47,12 +46,12 @@ class ProdutoController extends Controller
         $produto = Produto::create($request->all());
 
         if ($produto) {
-            Session::flash('mensagem', 'Produto cadastrado com sucesso.');
-            Session::flash('tipo', 'success');
+            session()->flash('mensagem', 'Produto cadastrado com sucesso.');
+            session()->flash('tipo', 'success');
             return redirect()->back();
         }
 
-        Session::flash('mensagem', 'Erro ao cadastrar produto.');
+        session()->flash('mensagem', 'Erro ao cadastrar produto.');
         return redirect()->back();
     }
 
@@ -75,7 +74,8 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        //
+        $unidades = Unidade::all();
+        return view('app.produto.edit', compact('produto', 'unidades'));
     }
 
     /**
@@ -87,7 +87,18 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+        $this->validarFormulario($request);
+        
+        $produto = $produto->update($request->all());
+
+        if ($produto) {
+            session()->flash('mensagem', 'Produto atualizado com sucesso.');
+            session()->flash('tipo', 'success');
+            return redirect()->back();
+        }
+        
+        session()->flash('mensagem', 'Erro ao atualizar produto.');
+        return redirect()->back();
     }
 
     /**
