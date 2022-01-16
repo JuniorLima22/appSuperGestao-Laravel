@@ -43,7 +43,7 @@
                             <td><button onclick="location.href='{{ route('produto.show', $produto->id) }}'" class="info  borda-branca">Visualizar</button></td>
                             <td><button onclick="location.href='{{ route('produto.edit', $produto->id) }}'" class="borda-branca">Editar</button></td>
                             <td>
-                                <form action="{{ route('produto.destroy', $produto->id) }}" method="POST" onsubmit="return confirm('Tem certeza de que deseja excluir este produto?')">
+                                <form action="{{ route('produto.destroy', $produto->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este produto?')">
                                     @csrf
                                     @method('DELETE')
                                     <button class="texto-branco danger borda-branca">Excluir</button>

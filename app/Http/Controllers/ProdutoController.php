@@ -109,7 +109,16 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        //
+        $produto = $produto->delete();
+
+        if ($produto) {
+            session()->flash('mensagem', 'Produto exluido com sucesso.');
+            session()->flash('tipo', 'success');
+            return redirect()->back();
+        }
+
+        session()->flash('mensagem', 'Erro ao exluir produto.');
+        return redirect()->back();
     }
 
     private function validarFormulario($request)
