@@ -36,4 +36,6 @@ Route::middleware('log.acesso', 'autenticacao:ldap, visitante')->prefix('/app')-
     Route::delete('/fornecedor/deletar/{id}', 'FornecedorController@deletar')->name('app.fornecedor.deletar');
 
     Route::resource('produto', 'ProdutoController');
+
+    Route::resource('produto-detalhe', 'ProdutoDetalheController');
 });
