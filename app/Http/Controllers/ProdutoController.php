@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Item;
 use App\Produto;
 use App\Unidade;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class ProdutoController extends Controller
     {
         $dataForm = $request->except('_token');
         
-        $produtos = Produto::paginate(5);
+        $produtos = Item::paginate(5);
 
         return view('app.produto.index', compact('produtos', 'dataForm'));
     }
