@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cliente;
 use App\Pedido;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,8 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        //
+        $clientes = Cliente::all();
+        return view('app.pedido.create', compact('clientes'));
     }
 
     /**
@@ -38,7 +40,18 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validarFormulario($request);
+        
+        $pedido = Pedido::create($request->all());
+
+        if ($pedido) {
+            session()->flash('mensagem', 'Pedido cadastrado com sucesso.');
+            session()->flash('tipo', 'success');
+            return redirect()->back();
+        }
+
+        session()->flash('mensagem', 'Erro ao cadastrar pedido.');
+        return redirect()->back();
     }
 
     /**
@@ -84,5 +97,18 @@ class PedidoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function validarFormulario($request)
+    {
+        return $request->validate(
+            [
+                'cliente_id' => 'required|exists:clientes,id',
+            ],
+            [
+                'required' => 'Campo cliente deve ser preenchido',
+                'cliente_id.exists' => 'O cliente informado não existe.',
+            ]
+        );
     }
 }
