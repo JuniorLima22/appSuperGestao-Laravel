@@ -25,6 +25,21 @@
             @endif
             <form action="{{ route('produto.store') }}" method="post">
                 @csrf
+                <select name="fornecedor_id">
+                    <option value="">-- Selecione um fornecedor --</option>
+                    @forelse ($fornecedores as $fornecedor)
+                        <option value="{{ $fornecedor->id }}" {{ old('fornecedor_id') == $fornecedor->id ? 'selected' : '' }} >{{ $fornecedor->nome }}</option>
+                    @empty
+                        <option value="">Nenhum registro encontrado</option>
+                    @endforelse
+                </select>
+                @error('fornecedor_id')
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        {{ $message }}
+                    </div>
+                @enderror
+                <br>
                 <input type="text" name="nome" value="{{ old('nome') }}" placeholder="Nome do produto" class="borda-preta">
                 @error('nome')
                     <div class="alert">

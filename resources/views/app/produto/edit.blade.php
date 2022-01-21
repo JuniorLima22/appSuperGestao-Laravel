@@ -24,6 +24,22 @@
             <form action="{{ route('produto.update', $produto->id) }}" method="post">
                 @csrf
                 @method('PUT')
+
+                <select name="fornecedor_id">
+                    <option value="">-- Selecione um fornecedor --</option>
+                    @forelse ($fornecedores as $fornecedor)
+                        <option value="{{ $fornecedor->id }}" {{ old('fornecedor_id', $produto->fornecedor_id) == $fornecedor->id ? 'selected' : '' }} >{{ $fornecedor->nome }}</option>
+                    @empty
+                        <option value="">Nenhum registro encontrado</option>
+                    @endforelse
+                </select>
+                @error('fornecedor_id')
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        {{ $message }}
+                    </div>
+                @enderror
+                <br>
                 <input type="text" name="nome" value="{{ old('nome', $produto->nome) }}" placeholder="Nome do produto" class="borda-preta">
                 @error('nome')
                     <div class="alert">

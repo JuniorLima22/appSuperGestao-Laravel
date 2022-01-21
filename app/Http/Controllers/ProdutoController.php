@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Fornecedor;
 use App\Item;
 use App\Produto;
 use App\Unidade;
@@ -31,7 +32,8 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
-        return view('app.produto.create', compact('unidades'));
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.create', compact('unidades', 'fornecedores'));
     }
 
     /**
@@ -44,7 +46,7 @@ class ProdutoController extends Controller
     {
         $this->validarFormulario($request);
 
-        $produto = Produto::create($request->all());
+        $produto = Item::create($request->all());
 
         if ($produto) {
             session()->flash('mensagem', 'Produto cadastrado com sucesso.');
@@ -76,17 +78,18 @@ class ProdutoController extends Controller
     public function edit(Produto $produto)
     {
         $unidades = Unidade::all();
-        return view('app.produto.edit', compact('produto', 'unidades'));
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.edit', compact('produto', 'unidades', 'fornecedores'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Produto  $produto
+     * @param  \App\Item  $produto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produto $produto)
+    public function update(Request $request, Item $produto)
     {
         $this->validarFormulario($request);
         
@@ -130,6 +133,7 @@ class ProdutoController extends Controller
                 'descricao' => 'required|min:3|max:200',
                 'peso' => 'required|integer',
                 'unidade_id' => 'required|exists:unidades,id',
+                'fornecedor_id' => 'required|exists:fornecedores,id',
             ],
             [
                 'required' => 'Campo :attribute deve ser preenchido',
@@ -140,6 +144,8 @@ class ProdutoController extends Controller
                 'peso.integer' => 'O campo peso deve ser um número inteiro.',
                 'unidade_id.required' => 'Campo unidade deve ser selecionado',
                 'unidade_id.exists' => 'A unidade de medida informada não existe.',
+                'fornecedor_id.required' => 'Campo fornecedor deve ser selecionado',
+                'fornecedor_id.exists' => 'O fornecedor informada não existe.',
             ]
         );
     }
