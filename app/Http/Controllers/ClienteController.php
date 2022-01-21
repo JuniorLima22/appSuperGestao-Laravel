@@ -27,7 +27,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('app.cliente.create');
     }
 
     /**
@@ -38,7 +38,18 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validarFormulario($request);
+        
+        $cliente = Cliente::create($request->all());
+
+        if ($cliente) {
+            session()->flash('mensagem', 'Cliente cadastrado com sucesso');
+            session()->flash('tipo', 'success');
+            return redirect()->back();
+        }
+
+        session()->flash('mensagem', 'Erro ao cadastrar cliente');
+        return redirect()->back();
     }
 
     /**
@@ -84,5 +95,19 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function validarFormulario($request)
+    {
+        return $request->validate(
+            [
+                'nome' => "required|min:3|max:40",
+            ],
+            [
+                'required' => 'Campo :attribute deve ser preenchido',
+                'nome.min' => 'O nome deve ter pelo menos 3 caracteres.',
+                'nome.max' => 'O nome não pode ter mais de 40 caracteres.',
+            ]
+        );
     }
 }
