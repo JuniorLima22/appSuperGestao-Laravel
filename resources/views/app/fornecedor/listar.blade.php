@@ -21,7 +21,7 @@
                     {{ Session::get('mensagem') }}
                 </div>
             @endif
-            <table >
+            <table>
                 <thead>
                     <tr>
                         <td>#</td>
@@ -49,6 +49,30 @@
                                 </form>
                             </td>
                         </tr>
+
+                        @if ($fornecedor->produtos->isNotEmpty())
+                        <tr>
+                            <td colspan="7">
+                                <table>
+                                    <caption>⮮ LISTA DE PRODUTOS ⮯</caption>
+                                    <thead>
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>Nome</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($fornecedor->produtos as $produto)
+                                        <tr>
+                                            <td>{{ $produto->id }}</td>
+                                            <td>{{ $produto->nome }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        @endif
                     @empty
                         <tr>
                             <td colspan="7">Nenhum registro encontrado</td>
