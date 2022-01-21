@@ -17,4 +17,10 @@ class Item extends Model
         // Relacionamento é: tabela 'produto_detalhes' fk 'produto_id' com pk 'id' da tabela 'produtos'
         return $this->hasOne('App\ItemDetalhe', 'produto_id', 'id');
     }
+
+    public function fornecedor()
+    {
+        return $this->belongsTo('App\Fornecedor');
+    }
+    
 }
