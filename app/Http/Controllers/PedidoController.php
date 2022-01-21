@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pedido;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -11,9 +12,12 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $dataForm = $request->except('_token');
+        
+        $pedidos = Pedido::paginate(10);
+        return view('app.pedido.index', compact('pedidos', 'dataForm'));
     }
 
     /**
