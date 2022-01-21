@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cliente;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -11,9 +12,12 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('app.cliente');
+        $dataForm = $request->except('_token');
+        
+        $clientes = Cliente::paginate(10);
+        return view('app.cliente.index', compact('clientes', 'dataForm'));
     }
 
     /**
