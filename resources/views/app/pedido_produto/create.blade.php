@@ -21,12 +21,40 @@
                     {{ Session::get('mensagem') }}
                 </div>
             @endif
-            <h4>Detalhes do pedido</h4>
+            
+            <h4>Detalhes do Pedido</h4>
             <p>ID do pedido: {{ $pedido->id }}</p>
             <p>Cliente: {{ $pedido->cliente_id }}</p>
+
+            @if ($pedido->produtos->isNotEmpty())
+                <table>
+                    <caption>⮮ ITENS DO PEDIDO ⮯</caption>
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Nome</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pedido->produtos as $produto)
+                        <tr>
+                            <td>{{ $produto->id }}</td>
+                            <td>{{ $produto->nome }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
+            
             <form action="{{ route('pedido-produto.store') }}" method="post">
                 @csrf
                 <input type="hidden" name="pedido_id" value="{{ $pedido->id }}">
+                @error('pedido_id')
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        {{ $message }}
+                    </div>
+                @enderror
                 <select name="produto_id">
                     <option value="">-- Selecione um produto --</option>
                     @forelse ($produtos as $produto)
