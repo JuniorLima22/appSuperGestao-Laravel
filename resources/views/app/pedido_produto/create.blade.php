@@ -33,6 +33,7 @@
                         <tr>
                             <td>ID</td>
                             <td>Nome</td>
+                            <td>Data Inclusão</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,6 +41,7 @@
                         <tr>
                             <td>{{ $produto->id }}</td>
                             <td>{{ $produto->nome }}</td>
+                            <td>{{ $produto->pivot->created_at->format('d/m/Y H:i:s') }}</td>
                         </tr>
                         @endforeach
                     </tbody>

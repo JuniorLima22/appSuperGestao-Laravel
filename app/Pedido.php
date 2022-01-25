@@ -18,6 +18,6 @@ class Pedido extends Model
          * 3º @param - Representa o nome da FK da tabela mapeada pelo modelo na tabela de relacionamentos
          * 4º @param - Representa o nome da FK da tabela mapeada pelo modelo utilizado no relacionamento que estamos implementando
          **/        
-        return $this->belongsToMany('App\Item', 'pedido_produtos', 'pedido_id', 'produto_id');
+        return $this->belongsToMany('App\Item', 'pedido_produtos', 'pedido_id', 'produto_id')->withPivot('created_at');
     }
 }
