@@ -19,7 +19,7 @@ class ProdutoController extends Controller
     {
         $dataForm = $request->except('_token');
         
-        $produtos = Item::with(['itemDetalhe', 'fornecedor'])->paginate(5);
+        $produtos = Item::with(['itemDetalhe', 'fornecedor', 'pedidos'])->paginate(5);
 
         return view('app.produto.index', compact('produtos', 'dataForm'));
     }

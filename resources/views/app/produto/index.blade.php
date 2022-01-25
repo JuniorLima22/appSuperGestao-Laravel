@@ -12,7 +12,7 @@
             <li><a href="">Consulta</a></li>
         </ul>
     </div>
-
+    {{-- @dd($produtos->all()) --}}
     <div class="informacao-pagina">
         <div style="width: 90%; margin-left: auto; margin-right: auto;">
             @if (Session::has('mensagem'))
@@ -58,6 +58,31 @@
                                 </form>
                             </td>
                         </tr>
+
+                        @if ($produto->pedidos->isNotEmpty())
+                        <tr>
+                            <td colspan="12">
+                                <table>
+                                    <caption>⮮ ID do(s) Pedido(s) ⮯</caption>
+                                    {{-- <thead>
+                                        <tr>
+                                            <td>ID do Pedido</td>
+                                        </tr>
+                                    </thead> --}}
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                @foreach ($produto->pedidos as $pedido)
+                                                <li><a href="{{ route('pedido-produto.create', $pedido->id) }}">{{ $pedido->id }}</a></li>
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        @endif
+                        
                     @empty
                         <tr>
                             <td colspan="7">Nenhum registro encontrado</td>
