@@ -34,7 +34,7 @@
                         <tr>
                             <td>{{ $pedido->id }}</td>
                             <td>{{ $pedido->cliente_id }}</td>
-                            <td><button onclick="location.href='{{ route('pedido.show', $pedido->id) }}'" class="info  borda-branca">Visualizar</button></td>
+                            <td><button onclick="location.href='{{ route('pedido-produto.create', ['pedido_id' => $pedido->id]) }}'" class="info  borda-branca">Adicionar Produtos</button></td>
                             <td><button onclick="location.href='{{ route('pedido.edit', $pedido->id) }}'" class="borda-branca">Editar</button></td>
                             <td>
                                 <form action="{{ route('pedido.destroy', $pedido->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este pedido?')">

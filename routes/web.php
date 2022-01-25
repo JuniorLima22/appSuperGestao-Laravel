@@ -40,5 +40,7 @@ Route::middleware('log.acesso', 'autenticacao:ldap, visitante')->prefix('/app')-
     Route::resource('cliente', 'ClienteController');
     
     Route::resource('pedido', 'PedidoController');
-    Route::resource('pedido-produto', 'PedidoProdutoController');
+    // Route::resource('pedido-produto', 'PedidoProdutoController');
+    Route::get('pedido-produto/create/{pedido_id}', 'PedidoProdutoController@create')->name('pedido-produto.create');
+    Route::post('pedido-produto/create', 'PedidoProdutoController@store')->name('pedido-produto.store');
 });
