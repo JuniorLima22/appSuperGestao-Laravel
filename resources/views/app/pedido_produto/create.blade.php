@@ -71,6 +71,15 @@
                         {{ $message }}
                     </div>
                 @enderror
+                <br>
+                <input type="number" name="quantidade" value="{{ old('quantidade') }}" placeholder="Quantidade de produto" class="borda-preta">
+                @error('quantidade')
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        {{ $message }}
+                    </div>
+                @enderror
+                <br>
                 <button type="submit" class="borda-preta">Cadastrar</button>
             </form>
         </div>

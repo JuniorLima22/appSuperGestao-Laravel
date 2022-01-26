@@ -41,10 +41,19 @@ class PedidoProdutoController extends Controller
     {
         $this->validarFormulario($request);
 
+        /** Inserindo registros por meio do relacionamento */
+        
+        // $pedido = Pedido::find($request->get('pedido_id'));
+        // $pedidoProduto = $pedido->produtos()->attach(
+        //     $request->get('produto_id'),
+        //     ['quantidade' => $request->get('quantidade')]
+        // );
+        
         $pedidoProduto = new PedidoProduto();
         $pedidoProduto->pedido_id = $request->get('pedido_id');
         $pedidoProduto->produto_id = $request->get('produto_id');
-        
+        $pedidoProduto->quantidade = $request->get('quantidade');
+
         if ($pedidoProduto->save()) {
             session()->flash('mensagem', 'Produto adicionado ao pedido com sucesso.');
             session()->flash('tipo', 'success');
@@ -106,12 +115,15 @@ class PedidoProdutoController extends Controller
             [
                 'pedido_id' => 'required|exists:pedidos,id',
                 'produto_id' => 'required|exists:produtos,id',
+                'quantidade' => 'required|integer',
             ],
             [
-                'pedido_id.required' => 'Campo pedido deve ser selecionado',
+                'pedido_id.required' => 'Campo pedido deve ser selecionado.',
                 'pedido_id.exists' => 'O pedido informado não existe.',
-                'produto_id.required' => 'Campo produto deve ser preenchido',
+                'produto_id.required' => 'Campo produto deve ser preenchido.',
                 'produto_id.exists' => 'O produto informado não existe.',
+                'quantidade.required' => 'Campo quantidade deve ser preenchido.',
+                'quantidade.integer' => 'Campo quantidade deve ser um número inteiro.'
             ]
         );
     }
