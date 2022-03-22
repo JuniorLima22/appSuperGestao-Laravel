@@ -42,5 +42,6 @@ Route::middleware('log.acesso', 'autenticacao:ldap, visitante')->prefix('/app')-
     Route::resource('pedido', 'PedidoController');
     // Route::resource('pedido-produto', 'PedidoProdutoController');
     Route::get('pedido-produto/create/{pedido_id}', 'PedidoProdutoController@create')->name('pedido-produto.create');
-    Route::post('pedido-produto/create', 'PedidoProdutoController@store')->name('pedido-produto.store');
+    Route::post('pedido-produto/store', 'PedidoProdutoController@store')->name('pedido-produto.store');
+    Route::delete('pedido-produto/destroy/{pedidoProduto}', 'PedidoProdutoController@destroy')->name('pedido-produto.destroy');
 });

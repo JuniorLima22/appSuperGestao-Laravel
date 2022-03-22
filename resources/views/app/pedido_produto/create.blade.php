@@ -33,7 +33,9 @@
                         <tr>
                             <td>ID</td>
                             <td>Nome</td>
+                            <td>Quantidade</td>
                             <td>Data Inclusão</td>
+                            <td>Ação</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,7 +43,15 @@
                         <tr>
                             <td>{{ $produto->id }}</td>
                             <td>{{ $produto->nome }}</td>
+                            <td>{{ $produto->pivot->quantidade }}</td>
                             <td>{{ $produto->pivot->created_at->format('d/m/Y H:i:s') }}</td>
+                            <td>
+                                <form id="form_{{$produto->pivot->id}}" action="{{ route('pedido-produto.destroy', [$produto->pivot->id]) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este produto do pedido?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="texto-branco danger borda-branca" onclick="document.getElementById('form_{{$produto->pivot->id}}')">Excluir</button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
